@@ -1,15 +1,17 @@
 package bjorn.petprojects.bpppetbook.model;
 
+
 import lombok.*;
+
+import java.util.ArrayList;
 
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class Cat extends Pet {
-    @Override
-    public PetType getPetType() {
-        return PetType.CAT;
-    }
+@Data
+public class PetOwners {
+    private String name;
+    private ArrayList<Pet> pets;
 }

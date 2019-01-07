@@ -1,13 +1,15 @@
 package bjorn.petprojects.bpppetbook.model;
 
-import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
+
+import lombok.*;
 
 import java.util.Date;
 
+
 @Getter
 @Setter
+@NoArgsConstructor
+@AllArgsConstructor
 @Data
 public abstract class Pet {
     private String name;
