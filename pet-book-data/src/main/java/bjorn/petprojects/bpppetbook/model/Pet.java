@@ -3,10 +3,7 @@ package bjorn.petprojects.bpppetbook.model;
 
 import lombok.*;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.Date;
 
 
@@ -16,11 +13,18 @@ import java.util.Date;
 @AllArgsConstructor
 @Data
 @Entity
-public abstract class Pet {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+@Table(name = "pets")
+public class Pet extends BaseEntity{
+
+    @Column(name = "name")
     private String name;
+    @Column(name = "birth_date")
     private Date birthDate;
-    public abstract PetType getPetType();
+    @ManyToOne
+    @JoinColumn(name = "type_id")
+    private PetType petType;
+
+    @ManyToOne
+    @JoinColumn(name = "owner_group_id")
+    private OwnerGroup ownerGroup;
 }
