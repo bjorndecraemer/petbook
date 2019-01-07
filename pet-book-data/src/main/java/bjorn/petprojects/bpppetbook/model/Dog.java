@@ -4,18 +4,20 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
+import javax.persistence.Entity;
 import java.util.Date;
 
 @Getter
 @Setter
 @Builder
+@Entity
 public class Dog extends Pet {
 
     public Dog() {
     }
 
-    public Dog(String name, Date birthDate) {
-        super(name, birthDate);
+    public Dog(Long id,String name, Date birthDate) {
+        super(id,name, birthDate);
     }
 
     @Override
