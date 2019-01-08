@@ -1,9 +1,6 @@
 package bjorn.petprojects.bpppetbook.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -20,6 +17,7 @@ public class PetType extends BaseEntity{
     @Column(name = "type_name")
     private String name;
 
+    @Builder
     public PetType(Long id, String name){
         super(id);
         this.name = name;

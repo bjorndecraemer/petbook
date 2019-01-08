@@ -9,11 +9,19 @@ import java.util.Date;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
 @Data
 @Entity
 @Table(name = "owners")
 public class Owner extends BaseEntity{
+
+    @Builder
+    public Owner(Long id, String firstName, String lastName, Date birthDate, OwnerGroup ownerGroup) {
+        super(id);
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.birthDate = birthDate;
+        this.ownerGroup = ownerGroup;
+    }
 
     @Column(name = "first_name")
     private String firstName;
