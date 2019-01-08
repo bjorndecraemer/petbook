@@ -28,4 +28,13 @@ public class OwnerGroup extends BaseEntity{
     private Set<Owner> owners;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "ownerGroup")
     private Set<Pet> pets;
+
+    public int getAmountOfPets(){
+        if(pets == null){
+            return 0;
+        }
+        else{
+            return pets.size();
+        }
+    }
 }
