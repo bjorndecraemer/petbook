@@ -1,0 +1,20 @@
+.petBookBrand{
+    height: 3em;
+}
+.petbookIcon{
+    height: 3em;
+    width: 3em;
+}
+.ownerIcon{
+    background-color: #739c9c;
+}
+.ownerIcon:hover{
+    background-color: #9bd6d6;
+}
+
+.petIcon{
+    background-color: #9c4a58;
+}
+.petIcon:hover{
+    background-color: #cf5d79;
+}

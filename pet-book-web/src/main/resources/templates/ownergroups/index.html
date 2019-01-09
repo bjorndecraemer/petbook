@@ -1,61 +1,103 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.com">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Owner-Groups</title>
     <link rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" th:href="@{/resources/css/pet-book.css}"/>
 </head>
 <body>
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="#">Navbar</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
-                <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Link</a>
-            </li>
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Dropdown
-                </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="#">Action</a>
-                    <a class="dropdown-item" href="#">Another action</a>
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="#">Something else here</a>
-                </div>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link disabled" href="#">Disabled</a>
-            </li>
-        </ul>
-        <form class="form-inline my-2 my-lg-0">
-            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-        </form>
-    </div>
-</nav>
-<div class="container">
-    <div class="row">
-        <div class="col-12">
-            <div class="list-group">
-                <div class="row list-group-item list-group-item-action" th:each="ownergroup : ${ownergroups}">
-                    <div class="col-10" th:text="${ownergroup.title}"></div>
-                    <div class="col-2" th:text="${ownergroup.getAmountOfPets()}"></div>
-                </div>
+<div th:replace="fragments/header :: header">
+    <!-- ============================================================================ -->
+    <!-- This content is only used for static prototyping purposes (natural templates)-->
+    <!-- and is therefore entirely optional, as this markup fragment will be included -->
+    <!-- from "fragments/header.html" at runtime.                                     -->
+    <!-- ============================================================================ -->
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#">Static header</a>
             </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li class="active"><a href="#">Home</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container-fluid">
+    <div class="card">
+        <div class="card-body">
+            <form th:action="@{/ownergroups/search}" th:object="${searchCriteria}" method="get" class="form-horizontal"
+                  id="search-owner-group-form">
+                <div class="form-group row">
+                    <div class="offset-8 col-4">
+                        <div class="row">
+                            <input type="text" class="form-control col" placeholder="Type your Search Criteria here..."
+                                   th:field="*{searchCriteria}" size="30" maxlength="80"/>
+                            <button type="submit" class="btn btn-outline-primary">Filter</button>
+                        </div>
+                        <div class="row">
+
+                            <div class="help-inline col">
+                                <div th:if="${#fields.hasAnyErrors()}">
+                                    <p th:each="err : ${#fields.allErrors()}" th:text="${err}">Error</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </form>
+        </div>
+    </div>
+    <div class="card">
+        <div class="card-body">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th scope="col">Group</th>
+                    <th scope="col">Owners</th>
+                    <th scope="col">Pets</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="ownergroup : ${ownergroups}">
+                    <td scope="col" th:text="${ownergroup.title}"></td>
+                    <td scope="col">
+                        <div class="row">
+                            <div data-toggle="tooltip"
+                                 data-placement="top"
+                                 th:title="${owner.getFullName()}"
+                                 th:each="owner : ${ownergroup.owners}"
+                                 class="col-3">
+                                <img class="img-thumbnail rounded-circle petbookIcon ownerIcon"
+                                     th:src="@{/resources/images/bjornavatar.jpg}">
+                            </div>
+                        </div>
+                    </td>
+                    <td scope="col">
+                        <div class="row">
+                            <div data-toggle="tooltip"
+                                 data-placement="top"
+                                 th:title="${pet.name}"
+                                 th:each="pet : ${ownergroup.pets}"
+                                 class="col-3">
+                                <img class="img-thumbnail rounded-circle petbookIcon petIcon"
+                                     th:src="@{/resources/images/grizelda-thumb.jpg}">
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
         </div>
     </div>
 </div>
 
 <script th:src="@{/webjars/jquery/jquery.min.js}"></script>
-<script th:src="@{/webjars/jquery-ui/jquery-ui.min.js}"></script>
-<script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+<script th:src="@{/webjars/popper.js/umd/popper.min.js}"></script>
+<script th:src="@{/webjars/bootstrap/js/bootstrap.bundle.min.js}"></script>
 </body>
 </html>

@@ -52,14 +52,18 @@ public class DummyDataLoader implements CommandLineRunner {
         Owner ownerKristel = Owner.builder().firstName("Kristel").lastName("Van Mileghem").birthDate(new Date(1978,10,07)).build();
         Owner ownerJohnDoe = Owner.builder().firstName("John").lastName("Doe").birthDate(new Date(1923,05,01)).build();
         Owner ownerAlanTuring = Owner.builder().firstName("Alan").lastName("Turing").birthDate(new Date(1912,06,23)).build();
+        Owner ownerMarieCurie = Owner.builder().firstName("Marie").lastName("Curie").birthDate(new Date(1918,03,01)).build();
+        Owner ownerCharlesDarwin = Owner.builder().firstName("Charles").lastName("Darwin").birthDate(new Date(1912,06,23)).build();
 
         Owner savedOwnerBjorn = ownerService.save(ownerBjorn);
         Owner savedOwnerKristel = ownerService.save(ownerKristel);
         Owner savedOwnerJohnDoe = ownerService.save(ownerJohnDoe);
         Owner savedOwnerAlanTuring = ownerService.save(ownerAlanTuring);
+        ownerMarieCurie = ownerService.save(ownerMarieCurie);
+        ownerCharlesDarwin = ownerService.save(ownerCharlesDarwin);
 
         // Creating Pets
-        Pet puffyPet = Pet.builder().petType(savedCatType).name("Fuffy").birthDate(new Date(2018,06,10)).build();
+        Pet puffyPet = Pet.builder().petType(savedCatType).name("Puffy").birthDate(new Date(2018,06,10)).build();
         Pet jackyPet = Pet.builder().petType(savedCatType).name("Jack").birthDate(new Date(2015,05,04)).build();
         Pet chihiroPet = Pet.builder().petType(savedCatType).name("Chihiro").birthDate(new Date(2016,03,26)).build();
         Pet ipsumPet = Pet.builder().petType(savedDogType).name("Ipsum the mangy dog").birthDate(new Date(2021,01,8)).build();
@@ -73,10 +77,12 @@ public class DummyDataLoader implements CommandLineRunner {
         Set<Owner> owners1 = new HashSet<>();
         owners1.add(savedOwnerBjorn);
         owners1.add(savedOwnerKristel);
-
+        owners1.add(ownerCharlesDarwin);
         Set<Owner> owners2 = new HashSet<>();
         owners2.add(savedOwnerAlanTuring);
         owners2.add(savedOwnerJohnDoe);
+        owners2.add(ownerMarieCurie);
+        owners2.add(ownerCharlesDarwin);
 
         Set<Pet> pets1 = new HashSet<>();
         pets1.add(puffyPet);
